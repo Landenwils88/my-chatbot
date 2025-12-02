@@ -7,6 +7,11 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f5f5f5;
     }
     .chat-container {
       width: 350px;
@@ -16,6 +21,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      background: white;
     }
     .chat-header {
       background: #4a6cf7;
@@ -28,7 +34,7 @@
       padding: 10px;
       overflow-y: auto;
       font-size: 14px;
-      background: #f5f5f5;
+      background: #fafafa;
     }
     .message {
       margin-bottom: 8px;
@@ -45,6 +51,7 @@
       background: white;
       color: #333;
       margin-right: auto;
+      border: 1px solid #eee;
     }
     .chat-input {
       display: flex;
@@ -64,6 +71,7 @@
       background: #4a6cf7;
       color: white;
       font-weight: bold;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -73,7 +81,7 @@
       Website Assistant
     </div>
     <div id="chat-window" class="chat-window">
-      <div class="message bot">Hi, how can I help?</div>
+      <div class="message bot">Hi, I’m your website bot, how can I help?</div>
     </div>
     <div class="chat-input">
       <input id="user-input" type="text" placeholder="Type here...">
@@ -92,47 +100,77 @@
       div.textContent = text;
       chatWindow.appendChild(div);
       chatWindow.scrollTop = chatWindow.scrollHeight;
-    }
-
     function getBotReply(text) {
-      const msg = text.toLowerCase();
-
-      function getBotReply(text) {
   const msg = text.toLowerCase();
 
-  if (msg.includes("hello") || msg.includes("hi")) {
-    return "Hey, how can I help you today?";
+  // greetings
+  if (msg.includes("hello") || msg.includes("hi") || msg.includes("hey") || msg.includes("sup")) {
+    return "Hey! How can I help you today?";
   }
 
-  if (msg.includes("price") || msg.includes("cost")) {
-    return "Prices start at $67 for a basic chatbot setup.";
+  // what do you do?
+  if (msg.includes("what") && msg.includes("you do")) {
+    return "I help explain our AI chatbot service. We build custom website chatbots for businesses.";
   }
 
-  if (msg.includes("contact")) {
-    return "You can reach me at support@youragency.com.";
+  if (msg.includes("what is this") || msg.includes("explain")) {
+    return "This is a simple website chatbot that can be added to any site using one small code snippet.";
   }
 
+  // how does it work?
+  if (msg.includes("how") && msg.includes("work")) {
+    return "Super easy! We build your bot, you paste one code snippet into your site, and it instantly appears.";
+  }
+
+  // price
+  if (msg.includes("price") || msg.includes("cost") || msg.includes("how much")) {
+    return "Basic chatbot setup starts at $50, and custom AI versions cost more depending on features.";
+  }
+
+  // setup time
+  if (msg.includes("long") && (msg.includes("take") || msg.includes("setup"))) {
+    return "Setup usually takes 10–30 minutes once we have your info.";
+  }
+
+  // coding needed?
+  if (msg.includes("coding") || msg.includes("code")) {
+    return "No coding needed! You just paste one line into your website.";
+  }
+
+  // customizable
+  if (msg.includes("custom") || msg.includes("change") || msg.includes("edit")) {
+    return "Yes! The chatbot replies, colors, and style can be fully customized to match your business.";
+  }
+
+  // refund
+  if (msg.includes("refund") || msg.includes("guarantee")) {
+    return "We offer a satisfaction guarantee. If the chatbot does not work for your business, we can help fix it.";
+  }
+
+  // hours
+  if (msg.includes("hours") || msg.includes("open")) {
+    return "We are available Monday through Friday, 9AM to 5PM.";
+  }
+
+  // contact
+  if (msg.includes("contact") || msg.includes("email") || msg.includes("support")) {
+    return "You can contact us at support@youragency.com.";
+  }
+
+  // services
+  if (msg.includes("services") || msg.includes("offer") || msg.includes("do you make")) {
+    return "We create custom website chatbots, AI automation tools, and simple bots for businesses.";
+  }
+
+  // help
   if (msg.includes("help")) {
-    return "Sure, what do you need help with?";
+    return "Sure! Tell me what you need help with.";
   }
 
-  if (msg.includes("services")) {
-    return "We create custom AI chatbots for websites!";
-  }
-
-  return "I’m not sure about that yet, but I can pass this to a human.";
+  // fallback
+  return "I'm not sure about that yet, but I can connect you with a real person if needed.";
 }
 
-    function handleSend() {
-      const text = userInput.value.trim();
-      if (!text) return;
-
-      addMessage(text, "user");
-      userInput.value = "";
-
-      const reply = getBotReply(text);
-      setTimeout(() => addMessage(reply, "bot"), 300);
-    }
 
     sendBtn.addEventListener("click", handleSend);
     userInput.addEventListener("keydown", e => {
@@ -141,5 +179,3 @@
   </script>
 </body>
 </html>
-
-
