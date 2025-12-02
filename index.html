@@ -50,8 +50,8 @@
     .message.bot {
       background: white;
       color: #333;
-      margin-right: auto;
       border: 1px solid #eee;
+      margin-right: auto;
     }
     .chat-input {
       display: flex;
@@ -77,11 +77,9 @@
 </head>
 <body>
   <div class="chat-container">
-    <div class="chat-header">
-      Website Assistant
-    </div>
+    <div class="chat-header">Website Assistant</div>
     <div id="chat-window" class="chat-window">
-      <div class="message bot">Hi, I’m your website bot, how can I help?</div>
+      <div class="message bot">Hi, I’m your website bot. How can I help?</div>
     </div>
     <div class="chat-input">
       <input id="user-input" type="text" placeholder="Type here...">
@@ -100,77 +98,76 @@
       div.textContent = text;
       chatWindow.appendChild(div);
       chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
     function getBotReply(text) {
-  const msg = text.toLowerCase();
+      const msg = text.toLowerCase();
 
-  // greetings
-  if (msg.includes("hello") || msg.includes("hi") || msg.includes("hey") || msg.includes("sup")) {
-    return "Hey! How can I help you today?";
-  }
+      if (msg.includes("hello") || msg.includes("hi") || msg.includes("hey")) {
+        return "Hey! How can I help you today?";
+      }
 
-  // what do you do?
-  if (msg.includes("what") && msg.includes("you do")) {
-    return "I help explain our AI chatbot service. We build custom website chatbots for businesses.";
-  }
+      if (msg.includes("what") && msg.includes("you do")) {
+        return "We build custom website chatbots for businesses.";
+      }
 
-  if (msg.includes("what is this") || msg.includes("explain")) {
-    return "This is a simple website chatbot that can be added to any site using one small code snippet.";
-  }
+      if (msg.includes("explain") || msg.includes("what is this")) {
+        return "This is a website chatbot that can be added to any site using one code snippet.";
+      }
 
-  // how does it work?
-  if (msg.includes("how") && msg.includes("work")) {
-    return "Super easy! We build your bot, you paste one code snippet into your site, and it instantly appears.";
-  }
+      if (msg.includes("how") && msg.includes("work")) {
+        return "Super easy! We build the bot, you paste one code snippet into your site.";
+      }
 
-  // price
-  if (msg.includes("price") || msg.includes("cost") || msg.includes("how much")) {
-    return "Basic chatbot setup starts at $50, and custom AI versions cost more depending on features.";
-  }
+      if (msg.includes("price") || msg.includes("cost")) {
+        return "Basic chatbot setup starts at $50.";
+      }
 
-  // setup time
-  if (msg.includes("long") && (msg.includes("take") || msg.includes("setup"))) {
-    return "Setup usually takes 10–30 minutes once we have your info.";
-  }
+      if (msg.includes("long") && msg.includes("take")) {
+        return "Setup usually takes 10–30 minutes.";
+      }
 
-  // coding needed?
-  if (msg.includes("coding") || msg.includes("code")) {
-    return "No coding needed! You just paste one line into your website.";
-  }
+      if (msg.includes("coding")) {
+        return "No coding needed — we handle everything!";
+      }
 
-  // customizable
-  if (msg.includes("custom") || msg.includes("change") || msg.includes("edit")) {
-    return "Yes! The chatbot replies, colors, and style can be fully customized to match your business.";
-  }
+      if (msg.includes("custom")) {
+        return "Yes! You can fully customize replies, style, and design.";
+      }
 
-  // refund
-  if (msg.includes("refund") || msg.includes("guarantee")) {
-    return "We offer a satisfaction guarantee. If the chatbot does not work for your business, we can help fix it.";
-  }
+      if (msg.includes("refund") || msg.includes("guarantee")) {
+        return "We offer a satisfaction guarantee.";
+      }
 
-  // hours
-  if (msg.includes("hours") || msg.includes("open")) {
-    return "We are available Monday through Friday, 9AM to 5PM.";
-  }
+      if (msg.includes("hours") || msg.includes("open")) {
+        return "We are available Monday–Friday, 9AM to 5PM.";
+      }
 
-  // contact
-  if (msg.includes("contact") || msg.includes("email") || msg.includes("support")) {
-    return "You can contact us at support@youragency.com.";
-  }
+      if (msg.includes("contact") || msg.includes("email")) {
+        return "You can contact us at support@youragency.com.";
+      }
 
-  // services
-  if (msg.includes("services") || msg.includes("offer") || msg.includes("do you make")) {
-    return "We create custom website chatbots, AI automation tools, and simple bots for businesses.";
-  }
+      if (msg.includes("services")) {
+        return "We create chatbots, AI tools, and automation systems.";
+      }
 
-  // help
-  if (msg.includes("help")) {
-    return "Sure! Tell me what you need help with.";
-  }
+      if (msg.includes("help")) {
+        return "Of course — what do you need help with?";
+      }
 
-  // fallback
-  return "I'm not sure about that yet, but I can connect you with a real person if needed.";
-}
+      return "I'm not sure about that yet, but I can connect you with a real person if needed.";
+    }
 
+    function handleSend() {
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      addMessage(text, "user");
+      userInput.value = "";
+
+      const reply = getBotReply(text);
+      setTimeout(() => addMessage(reply, "bot"), 300);
+    }
 
     sendBtn.addEventListener("click", handleSend);
     userInput.addEventListener("keydown", e => {
