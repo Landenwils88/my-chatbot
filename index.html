@@ -82,17 +82,19 @@
       <div class="message bot">Hi, I’m your website bot. How can I help?</div>
     </div>
     <div class="chat-input">
-      <input id="user-input" type="text" placeholder="Type here...">
-      <button id="send-btn">Send</button>
+      <input
+        id="user-input"
+        type="text"
+        placeholder="Type here..."
+        onkeydown="if(event.key === 'Enter'){ handleSend(); }"
+      >
+      <button onclick="handleSend()">Send</button>
     </div>
   </div>
 
   <script>
-    const chatWindow = document.getElementById("chat-window");
-    const userInput = document.getElementById("user-input");
-    const sendBtn = document.getElementById("send-btn");
-
     function addMessage(text, sender) {
+      const chatWindow = document.getElementById("chat-window");
       const div = document.createElement("div");
       div.className = "message " + sender;
       div.textContent = text;
@@ -116,49 +118,50 @@
       }
 
       if (msg.includes("how") && msg.includes("work")) {
-        return "Super easy! We build the bot, you paste one code snippet into your site.";
+        return "We build the bot for you, and you just paste one line of code into your website.";
       }
 
-      if (msg.includes("price") || msg.includes("cost")) {
-        return "Basic chatbot setup starts at $50.";
+      if (msg.includes("price") || msg.includes("cost") || msg.includes("how much")) {
+        return "Basic chatbot setup starts at about $50, and more advanced AI setups cost extra.";
       }
 
       if (msg.includes("long") && msg.includes("take")) {
-        return "Setup usually takes 10–30 minutes.";
+        return "Setup usually takes 10–30 minutes once we have your info.";
       }
 
-      if (msg.includes("coding")) {
-        return "No coding needed — we handle everything!";
+      if (msg.includes("coding") || msg.includes("code")) {
+        return "No coding needed for you, we handle the tech and you just paste a snippet.";
       }
 
-      if (msg.includes("custom")) {
-        return "Yes! You can fully customize replies, style, and design.";
+      if (msg.includes("custom") || msg.includes("change") || msg.includes("edit")) {
+        return "Yes, we can customize replies, colors, and layout to match your brand.";
       }
 
       if (msg.includes("refund") || msg.includes("guarantee")) {
-        return "We offer a satisfaction guarantee.";
+        return "We try to make sure you are happy and will work with you if there are any problems.";
       }
 
       if (msg.includes("hours") || msg.includes("open")) {
-        return "We are available Monday–Friday, 9AM to 5PM.";
+        return "We are available Monday to Friday, 9AM to 5PM.";
       }
 
-      if (msg.includes("contact") || msg.includes("email")) {
+      if (msg.includes("contact") || msg.includes("email") || msg.includes("support")) {
         return "You can contact us at support@youragency.com.";
       }
 
-      if (msg.includes("services")) {
-        return "We create chatbots, AI tools, and automation systems.";
+      if (msg.includes("services") || msg.includes("offer") || msg.includes("do you make")) {
+        return "We build website chatbots, simple AI tools, and automations for businesses.";
       }
 
       if (msg.includes("help")) {
-        return "Of course — what do you need help with?";
+        return "Sure, tell me what you need help with and I’ll do my best.";
       }
 
-      return "I'm not sure about that yet, but I can connect you with a real person if needed.";
+      return "I'm not sure about that yet, but a human can help you with that if needed.";
     }
 
     function handleSend() {
+      const userInput = document.getElementById("user-input");
       const text = userInput.value.trim();
       if (!text) return;
 
@@ -168,11 +171,6 @@
       const reply = getBotReply(text);
       setTimeout(() => addMessage(reply, "bot"), 300);
     }
-
-    sendBtn.addEventListener("click", handleSend);
-    userInput.addEventListener("keydown", e => {
-      if (e.key === "Enter") handleSend();
-    });
   </script>
 </body>
 </html>
