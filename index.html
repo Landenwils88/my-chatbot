@@ -97,20 +97,31 @@
     function getBotReply(text) {
       const msg = text.toLowerCase();
 
-      if (msg.includes("hello") || msg.includes("hi")) {
-        return "Hey, what’s up?";
-      }
+      function getBotReply(text) {
+  const msg = text.toLowerCase();
 
-      if (msg.includes("price") || msg.includes("cost")) {
-        return "Our services start at $X per month.";
-      }
+  if (msg.includes("hello") || msg.includes("hi")) {
+    return "Hey, how can I help you today?";
+  }
 
-      if (msg.includes("contact")) {
-        return "You can contact us at your@email.com.";
-      }
+  if (msg.includes("price") || msg.includes("cost")) {
+    return "Prices start at $50 for a basic chatbot setup.";
+  }
 
-      return "I am a simple bot right now, but I can pass this to a human.";
-    }
+  if (msg.includes("contact")) {
+    return "You can reach me at support@youragency.com.";
+  }
+
+  if (msg.includes("help")) {
+    return "Sure, what do you need help with?";
+  }
+
+  if (msg.includes("services")) {
+    return "We create custom AI chatbots for websites!";
+  }
+
+  return "I’m not sure about that yet, but I can pass this to a human.";
+}
 
     function handleSend() {
       const text = userInput.value.trim();
@@ -130,3 +141,4 @@
   </script>
 </body>
 </html>
+
